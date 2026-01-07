@@ -1,0 +1,20 @@
+import java.util.List;
+
+public interface CadastroCliente{
+    // Cadastro
+    public void adicionarCliente(Cliente cliente);
+    public boolean removerCliente(String id);
+    public void atualizarDadosCliente(Cliente cliente);
+    
+    // Consultas
+    public Cliente buscarClientePorId(String id);  // buscar por CPF ou CNPJ
+    public Cliente buscarClientePorEmail(String email);
+    public Cliente buscarClientePorTelefone(String telefone);
+    public List<Cliente> listarClientes();
+
+    // Verificações
+    public boolean clienteExiste(String id);  // verificar se o cliente já foi cadastrado
+
+    // Total de clientes
+    public int totalClientes();
+}
