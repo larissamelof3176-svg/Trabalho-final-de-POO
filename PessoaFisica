@@ -1,0 +1,30 @@
+public class PessoaFisica extends Pessoa{
+    private String cpf;
+
+    public PessoaFisica(String nome, String telefone, String email,String cpf){
+        super(nome, telefone, email);
+        this.cpf = cpf;
+    }
+
+    public String getCpf(){
+        return this.cpf;
+    }
+
+    public void setCpf( String novoCpf){
+        this.cpf = novoCpf;
+    }
+
+    @Override
+    public String getId() {
+        return this.cpf;
+    }
+
+    @Override
+    public void show(){
+        System.out.println("=== Pessoa Fisica : ===");
+        System.out.println("Nome da pessoa: " + getNome());
+        System.out.println("Telefone: " + getTelefone());
+        System.out.println("Email: " + getEmail());
+        System.out.println("CPF: " + getCpf());
+    }
+}
