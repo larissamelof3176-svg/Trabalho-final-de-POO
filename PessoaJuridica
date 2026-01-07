@@ -1,0 +1,45 @@
+public class PessoaJuridica extends Pessoa{
+    private String cnpj;
+    private PessoaFisica responsavel;
+    
+    public PessoaJuridica(String nome, String telefone, String email, String cnpj, PessoaFisica responsavel){
+        super(nome, telefone, email);
+        this.cnpj = cnpj;
+        this.responsavel = responsavel;
+    }
+
+    public String getCnpj(){
+        return this.cnpj;
+    }
+
+    public void setCnpj(String novoCnpj){
+        this.cnpj = novoCnpj;
+    }
+
+    @Override
+    public String getId() {
+        return this.cnpj;
+    }
+
+    public PessoaFisica getResponsavel(){
+        return this.responsavel;
+    }
+
+    public void setResponsavel( PessoaFisica novoResponsavel){
+        this.responsavel = novoResponsavel;
+    }
+
+    @Override
+    public void show(){
+        System.out.println("=== Pessoa Juridica: ===");
+        System.out.println("Nome da empresa: " + getNome());
+        System.out.println("Telefone: " + getTelefone());
+        System.out.println("Email: " + getEmail());
+        System.out.println("CNPJ: " + getCnpj());
+        System.out.println("Dados do responsável: ");
+        System.out.println("Nome do responsável: " + this.responsavel.getNome());
+        System.out.println("Telefone do responsável: " + this.responsavel.getTelefone());
+        System.out.println("Email do responsável: " + this.responsavel.getEmail());
+        System.out.println("CPF do responsável: " + this.responsavel.getCpf());
+    }
+}
