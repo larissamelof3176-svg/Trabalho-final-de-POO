@@ -1,0 +1,23 @@
+public abstract class Cliente{
+    private Pessoa dadosDoCliente;
+
+    public Cliente(Pessoa dadosDoCliente){
+        this.dadosDoCliente = dadosDoCliente;
+    }
+
+    public Pessoa getDados(){
+        return dadosDoCliente;
+    }
+
+    public void setDados(Pessoa novoDados){
+        this.dadosDoCliente = novoDados;
+    }
+
+    public String getId() {
+        return dadosDoCliente.getId();
+    }
+
+    public void show(){
+        dadosDoCliente.show();
+    }
+}
