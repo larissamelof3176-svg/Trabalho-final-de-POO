@@ -1,0 +1,124 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Duration;
+
+public class Evento {
+    private String idEvento;
+    private String nome;
+    private TipoEvento tipo;
+    private LocalDate data;
+    private LocalTime horarioInicio;
+    private LocalTime horarioFim;
+    private Cliente cliente;
+    private String descricao;
+    private int numeroConvidados;
+
+    public Evento(String nome, TipoEvento tipo,
+                  LocalDate data,
+                  LocalTime horarioInicio,
+                  LocalTime horarioFim,
+                  Cliente cliente,
+                  String descricao,
+                  int numeroConvidados) {
+
+        this.nome = nome;
+        this.tipo = tipo;
+        this.data = data;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
+        this.cliente = cliente;
+        this.descricao = descricao;
+        this.numeroConvidados = numeroConvidados;
+    }
+
+    public String getIdEvento() {
+        return idEvento;
+    }
+
+    // ID é definido pelo cadastro de eventos
+    public void setIdEvento(String idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public TipoEvento getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoEvento tipo) {
+        this.tipo = tipo;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalTime getHorarioInicio() {
+        return horarioInicio;
+    }
+
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public LocalTime getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(LocalTime horarioFim) {
+        this.horarioFim = horarioFim;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getNumeroConvidados() {
+        return numeroConvidados;
+    }
+
+    public void setNumeroConvidados(int numeroConvidados) {
+        this.numeroConvidados = numeroConvidados;
+    }
+
+    public double calcularOrcamento() {
+        long horas = Duration.between(this.horarioInicio, this.horarioFim).toHours();
+        return getTipo().calcularOrcamento(horas);
+    }
+
+    public void show() {
+        System.out.println("=== Evento ===");
+        System.out.println("ID do evento: " + this.idEvento);
+        System.out.println("Nome: " + this.nome);
+        System.out.println("Tipo: " + this.tipo);
+        System.out.println("Data: " + this.data);
+        System.out.println("Horário: " + this.horarioInicio + " às " + this.horarioFim);
+        System.out.println("Número de convidados: " + this.numeroConvidados);
+        System.out.println("Cliente responsável:");
+        this.cliente.show();
+        System.out.println("Valor do evento: R$ " + calcularOrcamento());
+    }
+}
