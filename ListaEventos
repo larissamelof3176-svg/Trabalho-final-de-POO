@@ -1,0 +1,130 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListaEventos implements CadastroEvento{
+    private List<Evento> listaEventos;
+    private int contadorId = 1;  // atribuirá o id de cada evento
+
+    public ListaEventos() {
+        this.eventos = new ArrayList<>();
+    }
+
+    @Override
+    public void adicionarEvento(Evento evento){
+        if (eventoExiste(evento.getNome(), evento.getData())) {
+            return;
+        }
+
+        evento.setIdEvento(contadorId++);
+        listaEventos.add(evento);
+    }
+
+    @Override
+    public boolean removerEvento(Evento evento) {
+        for (Evento e : listaEventos) {
+            if (e.getIdEvento().equals(evento.getIdEvento())) {
+                return listaEventos.remove(e);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void atualizarEvento(Evento evento) {
+        for (int i = 0; i < eventos.size(); i++) {
+            if (listaEventos.get(i).getIdEvento().equals(evento.getIdEvento())) {
+                listaEventos.set(i, evento);
+                return;
+            }
+        }
+    }
+
+   @Override
+    public Evento buscarEvento(Evento evento) {
+        for (Evento e : listaEventos) {
+            if (e.getIdEvento().equals(evento.getIdEvento)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Evento> listarEventosPorData(LocalDate data){
+        List<Evento> eventosPorData = new ArrayList<>();
+        for (Evento e : listaEventos) {
+            if (e.getData().equals(data)) {
+                eventosPorData.add(e);
+            }
+        }
+        return eventosPorData;
+    }
+
+    @Override
+    public List<Evento> listarEventosPorTipo(TipoEvento tipo) {
+        List<Evento> eventosPorTipo = new ArrayList<>();
+        for (Evento e : listaEventos) {
+            if (e.getTipo() == tipo) {
+                eventosPorTipo.add(e);
+            }
+        }
+        return eventosPorTipo;
+    }
+    
+    @Override
+    public List<Evento> listarEventosPorCliente(Cliente cliente) {
+        List<Evento> resultado = new ArrayList<>();
+
+        for (Evento e : listaEventos) {
+            if (e.getCliente().equals(cliente)) {
+                resultado.add(e);
+            }
+        }
+        return resultado;
+    }
+    
+    @Override
+    public List<Evento> listarEventos() {
+        return new ArrayList<>(ListaEventos); // evita exposição direta da lista
+    }
+
+    @Override
+    public double calcularTotalMensal(int mes, int ano) {
+        double total = 0.0;
+
+        for (Evento e : listaEventos) {
+            if (e.getData().getMonthValue() == mes &&
+                e.getData().getYear() == ano) {
+
+                total += e.calcularOrcamento();
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public double calcularPagamentoPorCliente(Cliente cliente) {
+
+        double total = 0.0;
+
+        List<Evento> eventosDoCliente = listarEventosPorCliente(cliente);
+
+        for (Evento e : eventosDoCliente) {
+            total += e.calcularOrcamento();
+        }
+
+        return total;
+    }
+
+    @Override
+    public boolean eventoExiste(Evento evento) {
+        return buscarEvento(evento) != null;
+    }
+
+    @Override
+    public int totalEventos() {
+        return eventos.size();
+    }
+
+}
