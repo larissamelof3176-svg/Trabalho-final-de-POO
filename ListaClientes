@@ -1,0 +1,77 @@
+import java.util.ArrayList;
+import java.util.List;
+public class ListaClientes implements CadastroCliente{
+
+    private List<Cliente> listaClientes;
+
+    public ListaClientes() {
+        this.listaClientes = new ArrayList<>();
+    }
+
+    @Override
+    public void adicionarCliente(Cliente cliente) {
+        listaClientes.add(cliente);
+    }
+
+    @Override
+    public boolean removerCliente(String id){
+        return listaClientes.removeIf(c -> c.getId().equals(id));
+    }
+
+    @Override
+    public void atualizarDadosCliente(Cliente cliente){
+        String idCliente = cliente.getId();
+
+        for(int i = 0; i < listaClientes.size(); i++){
+            if (listaClientes.get(i).getId().equals(idCliente)) { 
+                clientes.set(i, cliente); 
+                return; 
+            }
+        }
+    }
+
+    @Override
+    public Cliente buscarClientePorId(String id){
+        for (Cliente c : listaClientes){
+            if(c.getId().equals(id)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorEmail(String email){
+        for (Cliente c : listaClientes){
+            if(c.getDados().getEmail().equalsIgnoreCase(email)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorTelefone(String telefone){
+        for (Cliente c : listaClientes){
+            if(c.getDados().getTelefone().equalsIgnoreCase(telefone)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Cliente> listarClientes() {
+        return listaClientes;
+    }
+
+    @Override
+    public boolean clienteExiste(String id) {
+        return buscarClientePorId(id) != null;
+    }
+
+    @Override
+    public int totalClientes() {
+        return listaClientes.size();
+    }
+}
