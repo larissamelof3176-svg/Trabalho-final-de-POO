@@ -1,0 +1,24 @@
+import java.time.LocalDate;
+import java.util.List;
+
+public interface CadastroEvento{
+    // Cadastro
+    public void adicionarEvento(Evento evento);
+    public boolean removerEvento(String nome, LocalDate data);
+    public void atualizarDadosEvento(Evento evento);
+
+    // Consultas
+    public Evento buscarEvento(String nome, LocalDate data);
+    public List<Evento> listarEventosPorData(LocalDate data);
+    public List<Evento> listarEventosPorTipo(TipoEvento tipo);
+    public List<Evento> listarEventosPorCliente(Cliente cliente);
+    public List<Evento> listarEventos();
+    public double calcularTotalMensal(int mes, int ano);
+    public double calcularPagamentoPorCliente(Cliente cliente);
+
+
+    // Verificações
+    public boolean eventoExiste(String nome, LocalDate data);   // verificar se o evento já foi cadastrado
+
+    public int totalEventos();
+}
