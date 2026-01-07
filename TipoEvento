@@ -1,0 +1,17 @@
+public enum TipoEvento {
+    ANIVERSARIO(2000.0, 500.0),
+    CASAMENTO(8000.0, 1200.0),
+    CORPORATIVO(5000.0, 800.0);
+
+    private final double valorBase;
+    private final double valorPorHora;
+
+    TipoEvento(double valorBase, double valorPorHora) {
+        this.valorBase = valorBase;
+        this.valorPorHora = valorPorHora;
+    }
+
+    public double calcularOrcamento(long horas) {
+        return valorBase + (horas * valorPorHora);
+    }
+}
